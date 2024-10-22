@@ -18,13 +18,22 @@ def get_years(bib):
     return sorted(years, reverse=True)
 
 
-def get_pubs(bib, year):
-    pubs = {
-        key: inner_dict
-        for key, inner_dict in bib.items()
-        if "year" in inner_dict and inner_dict["year"] == year
+def get_pubs_in_year(bib, year):
+    filtered_pubs = {
+        key: pub for key, pub in bib.items() if year == pub['year']
     }
-    return dict(sorted(pubs.items(), key=lambda item: item[1]["author"]))
+
+    sorted_pubs = dict(
+        sorted(
+            filtered_pubs.items(),
+            key=lambda x: (
+                x[1]['author'][0][0],
+                x[1]['author'][0][1]
+            )
+        )
+    )
+
+    return sorted_pubs
 
 
 def count_venue_type(bib, venue_type):
@@ -44,3 +53,22 @@ def get_pub_by_gsid(bib, gsid):
         if "gsid" in pub and pub["gsid"] == gsid:
             return pub
     return None
+
+
+def get_pubs_with_tag(bib, tag):
+    filtered_pubs = {
+        key: pub for key, pub in bib.items() if tag in pub['tags']
+    }
+
+    sorted_pubs = dict(
+        sorted(
+            filtered_pubs.items(),
+            key=lambda x: (
+                -x[1]['year'],
+                x[1]['author'][0][0],
+                x[1]['author'][0][1]
+            )
+        )
+    )
+
+    return sorted_pubs

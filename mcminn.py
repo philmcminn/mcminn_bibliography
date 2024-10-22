@@ -17,7 +17,7 @@ add_pub(
         "doi": "",
         "gsid": "",
         "authorship": "joint",
-        "tags": [pseudo_tested],
+        "tags": [pseudo_tested, mutation_analysis],
     }
 )
 
@@ -48,7 +48,7 @@ add_pub(
         "doi": "",
         "gsid": "",
         "authorship": "joint",
-        "tags": [pseudo_tested],
+        "tags": [pseudo_tested, mutation_analysis],
     }
 )
 
